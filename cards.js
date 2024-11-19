@@ -6,7 +6,10 @@ let secondCard;
 const deck = [];
 let middleCards = [];
 let userCards = [];
-let cardPicked = false;
+let middleCardPicked = false;
+
+let pickedCard = null;
+let pickedElement = null;
 
 //define get elements by id stuff
 const imageElement1 = document.getElementById('card1');
@@ -68,7 +71,7 @@ function updateCompare(first, second) {
 
 
 //create the images of cards through 
-function createCardImage(hand, card) {
+function createCardImage(hand, card, index) {
     const newCard = document.createElement('img');
 
     newCard.src = `images/png/${card.number}_of_${card.suite}.png`
@@ -76,7 +79,7 @@ function createCardImage(hand, card) {
     //newCard.addEventListener('click', () => addToHand(userHand, newCard, card));
     newCard.addEventListener('click', () => exchangeCards(newCard));
 
-    newCard.id = `${card.number} of ${card.suite}`
+    newCard.id = `${index}`;
 
     //console.log(`Getting Images for ${card.number} of ${card.suite}`);
 
@@ -92,23 +95,25 @@ function drawNCards(hand) {
     for(let i=0; i<amount; i++) {
         const randIndex = genRandom(cardDeck.length);
         const chosenCard = cardDeck[randIndex];
+        const chosenArray = hand === cardHolder ? middleCards : userCards;
 
-        hand === cardHolder ? middleCards.push(chosenCard) : userCards.push(chosenCard);
+        chosenArray.push(chosenCard);
 
-        //drawnCards.push(chosenCard);
 
         //remove card
         cardDeck.splice(randIndex, 1);
-        createCardImage(hand, chosenCard);
+        createCardImage(hand, chosenCard, i);
     }
-    console.log(`${cardDeck.length} Cards Left`);
-    console.log(cardDeck);
+    //console.log(`${cardDeck.length} Cards Left`);
+    //console.log(cardDeck);
     hand === cardHolder ? console.log(middleCards) : console.log(userCards);
 }
 
 function addToHand(hand, element, card) {
     //remove element from middle
     element.remove();
+
+    //add something to remove card from respective array
 
     const movedImage = document.createElement('img');
 
@@ -120,19 +125,37 @@ function addToHand(hand, element, card) {
 
 
 function exchangeCards(element) {
-    //dont pick anything if card alr pickeed
-    if(cardPicked === true) {
+    //create var to store var later
+    let switchedCard = null;
+    //dont pick anything if card alr pickeed or not picke dyet
+    if(element.parentNode === userHand && middleCardPicked === false) {
+        return console.log('pick middle first idot')
+    }
+
+    if(middleCardPicked === true && element.parentNode === cardHolder) {
         return (console.log('card alr picked dummy'))
     }
 
-    cardPicked = true;
-    console.log('exchaning cards');
-    element.classList.add('picked');
-    
-    //await a userHand pick
-    
+    //check if card clicked is from user and middle clicked
+    if(middleCardPicked === true && element.parentNode === userHand) {
+        switchedCard = parseInt(element.id);
+        //switch the elements
+        console.log(`second pick: ${userCards[switchedCard].number} of ${userCards[switchedCard].suite}`)
+        console.log(`exchaning ${middleCards[pickedCard].number} of ${middleCards[pickedCard].suite} with ${userCards[switchedCard].number} of ${userCards[switchedCard].suite}`);
 
+        addToHand(userHand, element, userCards[switchedCard]); //add to user hand
+        addToHand(cardHolder, pickedElement, middleCards[switchedCard]); //add to middle
+    }
 
+    //pick first card
+    if(element.parentNode === cardHolder) {
+        middleCardPicked = true;
+        element.classList.add('picked');
+        //log the element picked rq
+        pickedCard = parseInt(element.id);
+        pickedElement = element;
+        console.log(`Card picked: ${middleCards[pickedCard].number} of ${middleCards[pickedCard].suite}`);
+    }    
 }
 
 
