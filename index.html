@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>React App</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <h1>Middle Four</h1>
+    <div id = 'cardHolder'>
+      <!-- <img class = "Card" id = 'card1' src="images\png\back.png"/>
+      <img class = "Card" id = 'card2' src="images\png\back.png"/> -->
+    </div>
+
+    <!-- <input type="'number" placeholder="Enter Number of Cards to Draw" id="amountInput"> -->
+    <button onClick='drawNCards(cardHolder)'>Draw Cards</button>
+    <button onClick='resetCards()'>Reset Cards</button>
+
+
+    <h1 id="compare">Player's Hand</h1>
+
+    <button onClick='drawNCards(userHand)'>Draw Cards</button>
+
+    <div id="userHand">
+
+    </div>
+
+
+    <script src="cards.js"></script>
+  </body>
+</html>
