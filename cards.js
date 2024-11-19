@@ -20,6 +20,11 @@ const userHand = document.getElementById('userHand');
 
 const updater = document.getElementById('fakeConsoleLog');
 
+function fakeConsoleLog(message) {
+    updater.textContent = '';
+    updater.textContent = message;
+}
+
 //function to generate 0-51
 function genRandom(index) {
     const r = Math.floor(Math.random() * index);
@@ -144,7 +149,8 @@ function exchangeCards(element) {
         //switch the elements
         console.log(`second pick: ${userCards[switchedCard].number} of ${userCards[switchedCard].suite}`)
         console.log(`exchaning ${middleCards[pickedCard].number} of ${middleCards[pickedCard].suite} with ${userCards[switchedCard].number} of ${userCards[switchedCard].suite}`);
-
+        fakeConsoleLog(`exchaning ${middleCards[pickedCard].number} of ${middleCards[pickedCard].suite} with ${userCards[switchedCard].number} of ${userCards[switchedCard].suite}`)
+        
         addToHand(userHand, element, userCards[switchedCard]); //add to user hand
         addToHand(cardHolder, pickedElement, middleCards[switchedCard]); //add to middle
     }
