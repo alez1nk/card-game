@@ -18,6 +18,8 @@ const cardHolder = document.getElementById('cardHolder');
 const cardAmount = document.getElementById('amountInput');
 const userHand = document.getElementById('userHand');
 
+const updater = document.getElementById('updater');
+
 //function to generate 0-51
 function genRandom(index) {
     const r = Math.floor(Math.random() * index);
