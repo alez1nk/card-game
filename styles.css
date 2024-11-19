@@ -58,15 +58,15 @@ body {
     transition: border-color 0.3s ease, width 1s ease, height 1s ease;
 }
 
-#cardHolder img:hover {
+#cardHolder img:hover, #cardHolder img.picked {
     border-color: green;
     width: 105px;
     height: auto;
 }
 
-#cardHolder img.picked {
+#userHand img:hover {
     border-color: green;
-    width: 105px;
+    width: 55px;
     height: auto;
 }
 
