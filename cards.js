@@ -18,7 +18,7 @@ const cardHolder = document.getElementById('cardHolder');
 const cardAmount = document.getElementById('amountInput');
 const userHand = document.getElementById('userHand');
 
-const updater = document.getElementById('updater');
+const updater = document.getElementById('fakeConsoleLog');
 
 //function to generate 0-51
 function genRandom(index) {
